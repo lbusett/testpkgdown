@@ -1,0 +1,67 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    fig.path = "man/figures/README-",
+    out.width = "100%"
+)
+```
+
+# test
+
+test Rmd to highlight issue 1278 (https://github.com/r-lib/pkgdown/issues/1278)
+
+## Example
+
+Using "=" to assign, the chunk is rendered properly:
+```{r cars, eval = FALSE}
+# random comment
+# 
+a = 4
+# random comment
+cars2 = cars %>% 
+    dplyr::filter(speed > 12)
+
+cars2 = dplyr::filter(cars,
+                      speed > 12)
+
+#Additional content
+cars
+```
+
+Using "<-" to assign, something strange happens. 
+
+In the first case, the "= cars %>" part goes missing.
+
+```{r p1, eval = FALSE}
+# random comment
+# 
+a = 4
+# random comment
+cars2 <- cars %>% 
+    dplyr::filter(speed > 12)
+
+#Additional content
+cars
+```
+
+In the second case, we miss also a part of the second line ("dplyr::filter(cars, speed >")
+
+```{r p2, eval = FALSE}
+# random comment
+# 
+a = 4
+# random comment
+cars2 <- dplyr::filter(cars,
+                       speed > 12)
+
+#Additional content
+cars
+```
+
